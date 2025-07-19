@@ -22,7 +22,7 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = () => {
     // For Netlify forms, we can still handle client-side logic
     // but the form will be submitted to Netlify automatically
     console.log('Form submitted:', formData);
@@ -160,6 +160,13 @@ const Contact: React.FC = () => {
               </motion.div>
             </motion.form>
           )}
+
+          {/* Hidden form for Netlify detection */}
+          <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <textarea name="message"></textarea>
+          </form>
         </motion.div>
       </div>
     </section>
