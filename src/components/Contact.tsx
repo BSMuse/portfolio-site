@@ -22,11 +22,27 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    // For Netlify forms, we can still handle client-side logic
-    // but the form will be submitted to Netlify automatically
-    console.log('Form submitted:', formData);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Show success message
     setSubmitted(true);
+    
+    // Submit the form to Netlify
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
+    })
+    .then(() => {
+      console.log('Form submitted successfully to Netlify');
+    })
+    .catch((error) => {
+      console.error('Error submitting form:', error);
+    });
     
     // Reset form after showing success message
     setTimeout(() => {
