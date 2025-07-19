@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+body {
+  @apply bg-background text-foreground font-sans antialiased;
+}
+
+::selection {
+  @apply bg-accent/20 text-foreground;
+}
+
+.container {
+  @apply max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.custom-cursor {
+  @apply fixed pointer-events-none mix-blend-difference;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, transform 0.3s;
+  z-index: 9999;
+}
+
+.custom-cursor.hover {
+  width: 48px;
+  height: 48px;
+}
+
+a, button, .interactive {
+  cursor: none;
+}
+
+@layer components {
+  .nav-link {
+    @apply relative text-sm font-medium transition-colors hover:text-foreground/80;
+  }
+  
+  .nav-link::after {
+    @apply content-[''] absolute left-0 -bottom-1 h-[2px] w-0 bg-accent transition-all duration-300;
+  }
+  
+  .nav-link:hover::after, .nav-link.active::after {
+    @apply w-full;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-6 tracking-tight;
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background font-medium rounded-md hover:bg-foreground/90 transition-all duration-300;
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 border border-foreground/20 rounded-md font-medium hover:bg-foreground/5 transition-all duration-300;
+  }
+}
