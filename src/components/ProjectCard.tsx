@@ -37,15 +37,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
   return (
     <>
-      <motion.article
-        className="group h-full bg-secondary rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 relative isolate"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true, margin: "-100px" }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
+        <motion.article
+          className="group h-full bg-secondary rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 relative isolate"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
         {/* Remove shimmer and tilt */}
           <div className="relative overflow-hidden aspect-[16/9] interactive" onClick={handleImageClick}>
             {/* Carousel Images */}
@@ -94,7 +94,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             {/* Click to view overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
               <button className="text-white text-sm font-medium bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full transition-opacity duration-300">
-                {isHovering ? 'Click to view gallery' : 'Hover to preview gallery'}
+                <span className="hidden md:inline">
+                  {isHovering ? 'Click to view gallery' : 'Hover to preview gallery'}
+                </span>
+                <span className="md:hidden">Click to view gallery</span>
               </button>
             </div>
           </div>

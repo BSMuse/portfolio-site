@@ -1,4 +1,4 @@
-import { ExperienceItem, EducationItem, CertificationItem, Project, SkillCategory, Profile } from '../types';
+import { ExperienceItem, EducationItem, CertificationItem, SkillCategory, Profile } from '../types';
 
 export const profile: Profile = {
   text: `Self-driven full-stack developer and AI data annotator with a passion for building scalable applications and improving AI systems. Strong background in web development, CRM optimization, and AI model evaluation. Skilled at delivering results in both team-based and independent settings. Constantly learning and refining a systematic, user-focused approach to problem solving.`
@@ -59,8 +59,7 @@ export const education: EducationItem[] = [
   },
   {
     degree: 'Diploma in Web Development',
-    institution: 'Lighthouse Labs',
-    period: '2024'
+    institution: 'Lighthouse Labs'
   },
   {
     degree: 'Bachelor of Business Administration',
