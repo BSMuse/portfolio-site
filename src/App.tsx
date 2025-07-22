@@ -9,11 +9,19 @@ import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
 import Chatbox from './components/Chatbox';
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.MODE === 'production'
+    ? 'https://portfolio-site-rsgh.onrender.com'
+    : 'http://localhost:3001');
+
 const App: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
+    // Warm up backend on mount
+    fetch(`${API_BASE_URL}/api/health`).catch(() => {});
   }, []);
 
   return (
