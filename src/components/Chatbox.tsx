@@ -11,7 +11,7 @@ interface Message {
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.MODE === 'production'
-  ? 'https://your-render-backend.onrender.com'
+  ? 'https://portfolio-site-rsgh.onrender.com'
   : 'http://localhost:3001');
 
 const Chatbox: React.FC = () => {
