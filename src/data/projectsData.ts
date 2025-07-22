@@ -36,7 +36,7 @@ export const projects: Project[] = [
       { src: '/images/Muttly/muttly_card_5.png', label: 'Scottish Terrier & Akita', type: 'image' }
     ],
     tags: ['AI/ML', 'React', 'Node.js', 'PostgreSQL', 'Gemini API', 'Replicate API'],
-    demoUrl: 'https://muttly.onrender.com',
+    demoUrl: 'https://muttly.netlify.app/',
     codeUrl: 'https://github.com/BSMuse/Muttly'
   },
   {
