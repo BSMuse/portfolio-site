@@ -19,7 +19,7 @@ const responseCache = new NodeCache({ stdTTL: 3600 });
 
 app.use(cors({
   origin: [
-    'https://alexanderdacosta.dev', // replace with your actual Netlify site URL
+    'https://alexanderdacosta.dev', 
     'http://localhost:5173' // allow local dev
   ],
   credentials: true
@@ -182,7 +182,7 @@ app.get('/api/chat/:sessionId', async (req, res) => {
     }
   } catch (error) {
     console.error('❌ Error fetching chat history:', error);
-    res.status(500).json({ error: 'Failed to fetch chat history', details: error.message });
+    res.status(500).json({ error: 'Failed to fetch chat history', details: (error as Error).message });
   }
 });
 
@@ -221,8 +221,8 @@ app.post('/api/chat/:sessionId', async (req, res) => {
     console.error('❌ Error saving chat session:', error);
     res.status(500).json({ 
       error: 'Failed to save chat session', 
-      details: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      details: (error as Error).message,
+      stack: process.env.NODE_ENV === 'development' ? (error as Error).stack : undefined
     });
   }
 });
@@ -230,7 +230,7 @@ app.post('/api/chat/:sessionId', async (req, res) => {
 // Enhanced chat endpoint with hybrid approach
 app.post('/api/chat', async (req, res) => {
   try {
-    const { message, context } = req.body;
+    const { message } = req.body;
     console.log('🤖 Processing chat message:', message);
     
     // Check cache first
@@ -287,7 +287,7 @@ app.get('/api/health', async (req, res) => {
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    res.status(500).json({ status: 'error', error: error.message });
+    res.status(500).json({ status: 'error', error: (error as Error) .message });
   }
 });
 
