@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",               // Modern JS target for Node 14+
+    "module": "CommonJS",             // Node uses CommonJS
+    "outDir": "./dist",               // Output directory for compiled JS
+    "rootDir": "./",                  // Source directory (optional if you want)
+    "strict": true,                   // Enable all strict type-checking options
+    "esModuleInterop": true,          // Allow `import express from 'express'`
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["node"]                 // Ensure Node.js typings are available
+  },
+  "include": ["**/*.ts"],             // Include all TS files in `server`
+  "exclude": ["node_modules"]
+}

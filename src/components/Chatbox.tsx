@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, Minimize2, MessageSquare } from 'lucide-react';
+import { X, Send, MessageSquare } from 'lucide-react';
 import ChatMessage from './ChatMessage';
 
 interface Message {
@@ -10,7 +10,9 @@ interface Message {
   source?: 'cache' | 'rule-based' | 'gemini' | 'fallback';
 }
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.MODE === 'production'
+  ? 'https://your-render-backend.onrender.com'
+  : 'http://localhost:3001');
 
 const Chatbox: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,7 +60,7 @@ const Chatbox: React.FC = () => {
     
     const fetchHistory = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/chat/${sessionId}`);
+        const response = await fetch(`${API_BASE_URL}/api/chat/${sessionId}`);
         if (response.ok) {
           const data = await response.json();
           if (data.messages && data.messages.length > 0) {
@@ -77,7 +79,7 @@ const Chatbox: React.FC = () => {
     if (!sessionId) return;
     
     try {
-      const response = await fetch(`${API_URL}/api/chat/${sessionId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/chat/${sessionId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: updatedMessages }),
@@ -111,7 +113,7 @@ const Chatbox: React.FC = () => {
     await updateSessionMessages(updatedMessages);
 
     try {
-      const response = await fetch(`${API_URL}/api/chat`, {
+      const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

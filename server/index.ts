@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import NodeCache from 'node-cache';
-import pool from '../src/lib/database';
-import resumeContext from '../src/data/resumeContext';
+import pool from './lib/database';
+import resumeContext from './data/resumeContext';
 import 'dotenv/config';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -17,7 +17,13 @@ if (!GEMINI_API_KEY) {
 // Cache responses for 1 hour to reduce API calls
 const responseCache = new NodeCache({ stdTTL: 3600 });
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://alexanderdacosta.dev', // replace with your actual Netlify site URL
+    'http://localhost:5173' // allow local dev
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Test database connection
@@ -295,7 +301,7 @@ app.get('/api/chat/stats', async (req, res) => {
       geminiEnabled: !!GEMINI_API_KEY,
       totalSessions: sessionCount.rows[0].count
     });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to get stats' });
   }
 });
