@@ -17,13 +17,26 @@ if (!GEMINI_API_KEY) {
 // Cache responses for 1 hour to reduce API calls
 const responseCache = new NodeCache({ stdTTL: 3600 });
 
+const allowedOrigins = [
+  'https://alexanderdacosta.dev',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-  origin: [
-    'https://alexanderdacosta.dev', 
-    'http://localhost:5173' // allow local dev
-  ],
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+app.options('*', cors({
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+
 app.use(express.json());
 
 // Test database connection
