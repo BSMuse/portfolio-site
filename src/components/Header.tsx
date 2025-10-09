@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onNavigate?: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -12,6 +16,7 @@ const Header: React.FC = () => {
     { label: 'About', href: '#about' },
     { label: 'Resume', href: '#resume' },
     { label: 'Projects', href: '#projects' },
+    { label: 'Blog', href: '#blog' },
     { label: 'Contact', href: '#contact' }
   ];
 
@@ -20,7 +25,7 @@ const Header: React.FC = () => {
       const position = window.scrollY;
       setScrolled(position > 50);
       
-      const sections = ['home', 'about', 'resume', 'projects', 'contact'];
+      const sections = ['home', 'about', 'resume', 'projects', 'blog', 'contact'];
       
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -45,6 +50,7 @@ const Header: React.FC = () => {
       <div className="container flex items-center justify-between">
         <motion.a 
           href="#home"
+          onClick={onNavigate}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

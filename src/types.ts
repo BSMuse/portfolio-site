@@ -42,3 +42,16 @@ export interface SkillCategory {
 export interface Profile {
   text: string;
 }
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  publishedAt: string;
+  readTime: string;
+  tags: string[];
+  featured: boolean;
+  slug: string;
+}
